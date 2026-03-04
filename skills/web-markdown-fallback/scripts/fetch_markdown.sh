@@ -21,7 +21,7 @@ fetch_with_prefix() {
 
   if [[ "$code" =~ ^2 ]]; then
     # Heuristic: consider useful if non-trivial size and not obvious error page
-    if [[ $(wc -c < /tmp/wmf_out.txt) -gt 200 ]] && ! grep -qiE "(error|not found|access denied|captcha)" /tmp/wmf_out.txt; then
+    if [[ $(wc -c < /tmp/wmf_out.txt) -gt 200 ]] && ! grep -qiE "(error|not found|access denied|captcha|something went wrong|try again|enable javascript|please disable)" /tmp/wmf_out.txt; then
       echo "SOURCE: ${prefix}"
       cat /tmp/wmf_out.txt
       return 0
