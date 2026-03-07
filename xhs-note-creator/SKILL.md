@@ -1,6 +1,5 @@
 ---
 name: xhs-note-creator
-version: 2.0.0
 description: 小红书笔记素材创作技能。当用户需要创建小红书笔记素材时使用这个技能。技能包含：根据用户的需求和提供的资料，撰写小红书笔记内容（标题+正文），生成图片卡片（封面+正文卡片），以及发布小红书笔记。
 ---
 
@@ -169,14 +168,14 @@ python scripts/publish_xhs.py --title "笔记标题" --desc "笔记描述" --ima
 **前置条件**：
 
 1. 需配置小红书 Cookie：
-   - 方式一：设置环境变量 `XHS_COOKIE=your_cookie_string_here`
-   - 方式二（推荐）：从 memory 读取，执行 `memory_search` 检索 `xhs-cookie`，然后从 `memory/xhs-cookie.md` 获取
+```
+XHS_COOKIE=your_cookie_string_here
+```
 
-2. Cookie 获取方式（如需要重新获取）：
+2. Cookie 获取方式：
    - 在浏览器中登录小红书（https://www.xiaohongshu.com）
    - 打开开发者工具（F12）
    - 在 Network 标签中查看请求头的 Cookie
-   - 获取后保存到 `memory/xhs-cookie.md` 以便后续使用
 
 ## 图片规格说明
 
