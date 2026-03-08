@@ -23,7 +23,7 @@
     },
     "agent-browser": {
       "version": "0.2.0",
-      "installedAt": 1772602915279
+      "installedAt": 1772770805322
     },
     "browser-cash": {
       "version": "1.0.0",
@@ -72,6 +72,10 @@
     "agent-memory": {
       "version": "1.0.0",
       "installedAt": 1772673179671
+    },
+    "computer-use": {
+      "version": "1.2.1",
+      "installedAt": 1772954585995
     }
   }
 }
