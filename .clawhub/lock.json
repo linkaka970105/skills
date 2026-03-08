@@ -76,6 +76,10 @@
     "computer-use": {
       "version": "1.2.1",
       "installedAt": 1772954585995
+    },
+    "multi-search-engine": {
+      "version": "2.0.1",
+      "installedAt": 1772976697260
     }
   }
 }
