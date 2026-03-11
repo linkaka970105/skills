@@ -80,6 +80,10 @@
     "multi-search-engine": {
       "version": "2.0.1",
       "installedAt": 1772976697260
+    },
+    "agent-builder": {
+      "version": "1.0.0",
+      "installedAt": 1773245217204
     }
   }
 }
