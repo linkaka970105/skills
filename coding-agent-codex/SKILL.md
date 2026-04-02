@@ -1,6 +1,6 @@
 ---
 name: coding-agent-codex
-description: 使用 Codex 作为默认编码与代码审查执行引擎，适用于新功能开发、PR 审核、PR 修复、大代码库重构及需要代码探索的迭代任务。
+description: 当用户要求写代码、改代码、修 bug、实现功能、重构、审查 PR、分析跨文件影响，或希望在 OpenClaw 的 IM 会话里默认由 Codex 处理编码任务时使用。复杂编码与代码审查默认优先走 Codex；如果当前对话已绑定 Codex ACP 或适合持续迭代，优先复用/创建 Codex ACP 会话。仅对简单单文件读取或一行级修改不触发。
 ---
 
 # Coding Agent (Codex 版) 运行规范
@@ -17,7 +17,7 @@ description: 使用 Codex 作为默认编码与代码审查执行引擎，适用
 ❌ 不适用：
 - 一行级别的简单改动（直接用 edit）
 - 仅需读取单个文件内容、且无需上下文推理（直接用 read）
-- 明确要求线程绑定 ACP 的持续会话任务（直接走 sessions_spawn）
+- 明确要求使用其他 harness（如 Claude Code / Gemini / Pi）而非 Codex 的任务
 
 ---
 
@@ -35,9 +35,9 @@ description: 使用 Codex 作为默认编码与代码审查执行引擎，适用
 - 多轮迭代、跨文件探索、测试构建、重构或复杂审查任务，使用后台会话运行。
 - 用 process 工具查看日志、进度、状态。
 
-4. **线程绑定 ACP 任务走 sessions_spawn**
-- 需要持续会话/线程上下文时，使用 `sessions_spawn(runtime="acp")`。
-- 不用本地临时 exec 流程替代线程型 ACP 任务。
+4. **持续会话优先复用当前 Codex ACP**
+- 在 OpenClaw 的飞书/微信/Discord 等会话中，如果当前对话已经绑定 Codex ACP，优先继续使用该会话。
+- 若任务明显需要持续迭代、跨轮修改、长时间探索或线程化上下文，则优先创建/复用 `runtime="acp"` 的 Codex 会话，而不是退回一次性流程。
 
 ---
 
@@ -48,6 +48,13 @@ description: 使用 Codex 作为默认编码与代码审查执行引擎，适用
 - 仅在以下情况使用内置工具：
   - `read`：读取文件
   - `edit`：小范围精确替换
+
+### A1. IM 会话中的默认路由
+- 在 OpenClaw 的 IM 直聊里，默认由 `main` agent 接住用户消息，再按任务需要调用 Codex ACP。
+- 不要求用户手动发送 `/acp` 命令。
+- 若任务明显属于复杂编码任务，优先走 Codex ACP，而不是直接用本地零散工具硬做。
+- 编码任务完成后，把结果总结回当前 OpenClaw 对话；后续普通消息默认回到 `main` agent，而不是把整条聊天永久留在 Codex ACP。
+- 只有当用户明确要求继续同一编码会话、持续调试、或单独开编码线程时，才保持/复用持续的 Codex ACP 上下文。
 
 ### B. 小改动快捷路径
 - 条件：改动很小、影响范围明确、无需探索上下文

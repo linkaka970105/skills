@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "skills": {
+    "humanizer": {
+      "name": "Humanizer",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=humanizer",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "youtube-watcher": {
+      "name": "YouTube Watcher",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=youtube-watcher",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "youtube-api-skill": {
+      "name": "YouTube",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=youtube-api-skill",
+      "source": "skillhub",
+      "version": "1.0.3"
+    },
+    "frontend-design": {
+      "name": "Frontend Design",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=frontend-design",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "model-usage": {
+      "name": "Model Usage",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=model-usage",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "automation-workflows": {
+      "name": "Automation Workflows",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=automation-workflows",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "humanizer-zh": {
+      "name": "humanizer-zh",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=humanizer-zh",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "video-frames": {
+      "name": "Video Frames",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=video-frames",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "paddleocr-doc-parsing": {
+      "name": "PaddleOCR Document Parsing",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=paddleocr-doc-parsing",
+      "source": "skillhub",
+      "version": "2.0.7"
+    },
+    "nano-pdf": {
+      "name": "Nano Pdf",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=nano-pdf",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "auto-updater": {
+      "name": "Auto-Updater Skill",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=auto-updater",
+      "source": "skillhub",
+      "version": "1.0.0"
+    }
+  }
+}
