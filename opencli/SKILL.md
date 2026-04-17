@@ -9,11 +9,15 @@ OpenCLI is a CLI framework that wraps website APIs into local command-line tools
 **Quick mode** (single command): Follow `references/CLI-ONESHOT.md` — just a URL + description, 4 steps.
 **Full mode** (complex adapters): Read `references/CLI-EXPLORER.md` before writing any code. It covers: browser exploration workflow, auth strategy decision tree, platform SDKs (e.g. Bilibili `apiGet`/`fetchJson`), YAML vs TS selection, `tap` step debugging, cascading request patterns, and common pitfalls.
 ## Output Specification
-All adapter files **must** be written to `~/.opencli/clis/{site}/{command}.yaml` or `.ts`. No other output locations or file formats (`.js`, `.json`, `.md`, `.txt`) are permitted.
+Primary source files should be written to `~/.opencli/clis/{site}/{command}.yaml` or `.ts`.
+
+**Runtime caveat (current opencli builds):** local `.ts` adapters under `~/.opencli/clis/` may be ignored at runtime. If that happens, keep the `.ts` source file there **and** emit a sibling compiled `.js` file for actual execution.
+
 Correct examples:
 - `~/.opencli/clis/aem/page-views.ts`
 - `~/.opencli/clis/twitter/lists.yaml`
 - `~/.opencli/clis/bilibili/favorites.ts`
+- if local TS loading is ignored: also write `~/.opencli/clis/bilibili/favorites.js`
 ## Supported Formats
 | Format | Extension | When to use |
 |--------|-----------|-------------|
