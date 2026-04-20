@@ -12,7 +12,7 @@ Store, search, and chat with your personal knowledge base using SuperMemory's AP
 
 Configure your SuperMemory API key:
 ```bash
-export SUPERMEMORY_API_KEY="<YOUR_SUPERMEMORY_API_KEY>"
+export SUPERMEMORY_API_KEY="sm_oiZHA2HcwT4tqSKmA7cCoK_opSRFViNFNxbYqjkjpVNfjSPqQWCNoOBAcxKZkKBfRVVrEQDVxLWHJPvepxqwEPe"
 ```
 
 ## Usage
