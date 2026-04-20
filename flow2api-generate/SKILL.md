@@ -20,6 +20,7 @@ Use the local Flow2API service at `http://127.0.0.1:38000` for image and video g
 - Service URL: `http://127.0.0.1:38000`
 - Captcha mode: `personal`
 - Default image model: `gemini-3.1-flash-image-landscape`
+- Gemini 3.0 Pro image models are available, including: `gemini-3.0-pro-image-landscape`, `gemini-3.0-pro-image-portrait`, `gemini-3.0-pro-image-square`, `gemini-3.0-pro-image-four-three`, `gemini-3.0-pro-image-three-four`
 - Video models include: `veo_3_1_t2v_fast_landscape`, `veo_3_1_i2v_s_fast_fl_landscape`, `veo_3_1_r2v_fast_portrait`
 - API key source: prefer `FLOW2API_API_KEY`; otherwise read `/home/linkaka/flow2api/data/flow.db`; fallback to local default
 
@@ -80,11 +81,11 @@ python3 /home/linkaka/.hermes/skills/media/flow2api-generate/scripts/flow2api_cl
 1. Run `status` before real generation unless the service was checked in the same session.
 2. Use `--dry-run` for prompt/payload checks and debugging that should not consume Flow credits.
 3. For normal image requests, use `gemini-3.1-flash-image-landscape` unless the user asks for portrait, square, video, or a specific model.
-3. For normal image requests, use `gemini-3.1-flash-image-landscape` unless the user asks for portrait, square, video, or a specific model.
-4. For video requests, use a video model and set `--timeout 1800` or higher.
-5. Return the JSON `primary_url`, elapsed time, model, and concise status. Do not paste full streamed logs unless asked.
-6. If the user wants the generated image delivered in chat, do not stop at the remote `primary_url`. Download the image to a stable local path first, then send/embed the local file directly in the chat surface. Avoid replying with only an expiring URL unless the user explicitly asks for a link.
-7. Some **2K image variants** may return a local cached URL like `http://127.0.0.1:38000/tmp/..._2K.jpg` instead of a public `storage.googleapis.com` URL. If the user needs a stable copy, save it immediately to a non-temporary local path. If the user explicitly needs an external link, prefer a non-2K image variant.
+4. If the user explicitly asks for a `3.0 pro` model, honor that request by selecting the matching `gemini-3.0-pro-image-*` variant for the desired aspect ratio. For text-heavy educational posters, labeled diagrams, or infographic-style outputs, prefer `gemini-3.0-pro-image-four-three` unless the user asks for another shape.
+5. For video requests, use a video model and set `--timeout 1800` or higher.
+6. Return the JSON `primary_url`, elapsed time, model, and concise status. Do not paste full streamed logs unless asked.
+7. If the user wants the generated image delivered in chat, do not stop at the remote `primary_url`. Download the image to a stable local path first, then send/embed the local file directly in the chat surface. Avoid replying with only an expiring URL unless the user explicitly asks for a link.
+8. Some **2K image variants** may return a local cached URL like `http://127.0.0.1:38000/tmp/..._2K.jpg` instead of a public `storage.googleapis.com` URL. If the user needs a stable copy, save it immediately to a non-temporary local path. If the user explicitly needs an external link, prefer a non-2K image variant.
 
 ## Troubleshooting
 
