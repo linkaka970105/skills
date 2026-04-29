@@ -35,7 +35,12 @@ description: 当用户要求写代码、改代码、修 bug、实现功能、重
 - 多轮迭代、跨文件探索、测试构建、重构或复杂审查任务，使用后台会话运行。
 - 用 process 工具查看日志、进度、状态。
 
-4. **持续会话优先复用当前 Codex ACP**
+4. **默认模型与推理强度**
+- 调用 Codex CLI 默认使用 `gpt-5.5` 和 high reasoning：`codex exec -m gpt-5.5 -c model_reasoning_effort="high" ...`。
+- 除非用户明确指定其他模型或档位，不要降级到 `gpt-5.4`、mini 或默认模型。
+- 当前 Codex CLI 版本可能拒绝旧参数 `--approve-all` / `--yolo`；最大权限本地任务使用 `--dangerously-bypass-approvals-and-sandbox`。
+
+5. **持续会话优先复用当前 Codex ACP**
 - 在 OpenClaw 的飞书/微信/Discord 等会话中，如果当前对话已经绑定 Codex ACP，优先继续使用该会话。
 - 若任务明显需要持续迭代、跨轮修改、长时间探索或线程化上下文，则优先创建/复用 `runtime="acp"` 的 Codex 会话，而不是退回一次性流程。
 
