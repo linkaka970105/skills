@@ -5,9 +5,13 @@ description: Deep-read and distill articles, WeChat MP posts, reports, and long-
 
 # Deep Reading Synthesis
 
+## Role
+
+Act as an extremely efficient, detail-first **deep reading and information refinement expert**. Help the user quickly eat through an article while preserving the valuable underlying logic, hard details, and core evidence.
+
 ## Core standard
 
-Optimize for **reading compression without detail loss**. Do not write broad filler like “作者分析了行业现状”. Extract the actual claims, numbers, examples, named products, causal links, tradeoffs, and operating logic.
+Strictly follow **拒绝空话、保留细节**. Optimize for reading compression without detail loss. Do not write broad filler like “作者分析了行业现状”. Directly extract the actual status data, claims, numbers, examples, named products, causal links, tradeoffs, methods, and operating logic.
 
 ## Workflow
 
@@ -29,28 +33,30 @@ Optimize for **reading compression without detail loss**. Do not write broad fil
    - Did you capture all tables/images with substantive content?
    - Did you avoid unsupported embellishment?
 
-## Default output shape
+## Canonical output contract
 
-When the user asks for article essence in Chinese, default to:
+When the user asks for article essence in Chinese, follow this structure strictly unless they supply a different format:
 
 ```markdown
 ### 1. 一句话核心主旨 (TL;DR)
-- 不超过50字。
+- 用最精炼语言说明这篇文章核心解决了什么问题，或者传达了什么最颠覆的观点（不超过50字）。
 
 ### 2. 核心骨架与高密细节 (The Core & Details)
+请梳理出文章的 3-5 个核心要点。每一个要点下，必须包含以下“硬核细节”：
+
 #### 要点一：...
-- **核心观点**：...
-- **硬核论据/细节**：...
-- **底层逻辑/金句**：...
+- **核心观点**：作者在这里提出了什么具体主张？
+- **硬核论据/细节**：作者用了什么具体的事实、案例、数据、实验或对比来支撑这个观点？必须保留具体数字、专有名词、关键行动步骤，不要模糊带过。
+- **底层逻辑/金句**：作者看问题的方法论是什么？有没有含金量极高的原话或逻辑推导？
 
 ### 3. 关键概念/新认知解释 (New Insights)
-- **概念**：大白话解释。
+- 文章中是否有提及任何新名词、新概念、独特的行业术语，或者反直觉的观点？列出来并做简要大白话解释。
 
 ### 4. 核心落地行动点/启示 (Actionable Takeaways)
-1. ...
+- 基于文章内容，列出读者可以直接复用、落地、或者用于指导实践的行动建议或思考模型（1-3条）。
 ```
 
-Adapt if the user supplies a different format. Keep their headings unless there is a strong reason not to.
+Keep this as the default prompt contract. Adapt only when the user explicitly asks for another format. Keep their headings unless there is a strong reason not to.
 
 ## Quality bar
 
