@@ -1,7 +1,6 @@
 ---
 name: skill-creator
 description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.
-license: Complete terms in LICENSE.txt
 ---
 
 # Skill Creator
@@ -354,3 +353,31 @@ After testing the skill, users may request improvements. Often this happens righ
 2. Notice struggles or inefficiencies
 3. Identify how SKILL.md or bundled resources should be updated
 4. Implement changes and test again
+
+### Post-session library maintenance
+
+When asked to review a completed session and update the skill library, treat the review as an active maintenance task, not a passive summary. Look first for corrections, workflow changes, non-trivial fixes, tool quirks, and missing instructions in any skill loaded during the session.
+
+Preference order:
+
+1. Patch a currently loaded skill if it governs the lesson.
+2. Otherwise patch an existing class-level umbrella skill.
+3. Add a focused `references/`, `templates/`, or `scripts/` support file under an umbrella when details are too session-specific for SKILL.md.
+4. Create a new skill only when no class-level umbrella exists; never create one-off skills named after a PR, error string, feature codename, or single session.
+
+Embed user corrections about style, formatting, or workflow into the relevant SKILL.md body, not only memory. Use support files for detailed transcripts, provider quirks, reproduction recipes, or condensed external docs, and add a one-line pointer from SKILL.md so future agents discover the file.
+
+### Local installed skill updates with a GitHub mirror
+
+When updating an installed local skill for a user who keeps a separate skills repository mirror:
+
+1. If restoring a missing/deleted skill, check the mirror before recreating it: search all remote branches/tags and path history for the skill name and likely aliases. If an older mirror version exists, restore from that exact version first, then patch only what is needed.
+2. Patch the installed skill first and verify the local behavior or examples.
+3. Check whether the installed skills directory is a git repo. If it is not, clone the mirror repository to a temp directory.
+4. Copy only the changed skill directory or files into the mirror, preserving the skill's folder-level scope.
+5. Commit with the configured git identity and push the mirror branch the user expects.
+6. If the mirror does not already contain that skill, add it as a new top-level skill folder rather than assuming the installed category path exists remotely.
+7. Report both the local skill changed and the pushed commit hash.
+8. If a later session changes another loaded skill, repeat the mirror sync for every changed skill directory, not only the main skill for the user task. Small supporting-skill patches still count as library updates and should be pushed too when the user has this preference.
+9. If a post-session review patches a support skill only used indirectly, mirror it anyway; every changed local skill directory must reach the mirror before reporting completion.
+10. If the mirror does not already contain a changed skill, create a top-level folder named after the skill and copy the whole installed skill directory, including `references/`, `templates/`, and `scripts/`. Do not silently skip newly introduced local skills just because the remote mirror lacks a folder yet.
